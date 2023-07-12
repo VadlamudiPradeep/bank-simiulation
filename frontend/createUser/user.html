@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Bank Account</title>
+    <link rel="stylesheet"  href="./user.css"/>
+</head>
+<body>
+    <div>
+        <form id="bankAccountForm">
+            <label>Name:</label>
+            <input id="name" class="name" placeholder="Name..." required/>
+            
+            <label>Gender:</label>
+            <input id="gender" class="gender" placeholder="Gender..." required />
+
+            <label>Date of Birth:</label>
+            <input id="dob" class="dob" placeholder="DOB..." required />
+            <label>Email:</label>
+            <input id="email" class="email" placeholder="Email..." required/>
+            <label>Phone:</label>
+            <input id="phone" class="phone" placeholder="Phone..." required />
+            <label>Address:</label>
+            <input id="address" class="address" placeholder="Address" required />
+            <label>Pin Code:</label>
+            <input id="pincode" class="pincode" placeholder="PinCode..." required />
+
+            <label>Initial Balance:</label>
+            <input id="initialBalance" class="initialBalance" placeholder="Initial Balance..." required />
+
+            <label>Aadhar No:</label>
+            <input id="aadharNo" class="aadharNo" placeholder="Aadhar No..." required/>
+            <label>Pan No:</label>
+            <input id="panNo" class="panNo" placeholder="Pan No..." required/>
+            <label>Password</label>
+            <input id="password" class="password" placeholder="Password..." required />
+            <button type="submit">Send</button>
+            
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js" integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script>
+        // Get the form element
+        const form = document.getElementById('bankAccountForm');
+
+        // Add submit event listener to the form
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get the form values
+            const name = document.getElementById('name').value;
+            const gender = document.getElementById('gender').value;
+            const dob  =document.getElementById('dob').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const initialBalance = document.getElementById('initialBalance').value
+            const pincode = document.getElementById('pincode').value;
+            const aadharNo = document.getElementById('aadharNo').value;
+            const panNo = document.getElementById('panNo').value;
+            let password  = document.getElementById('password').value;
+
+            // Create an object to store the form data
+            const formData = {
+                name: name,
+                gender: gender,
+                dob:dob,
+                email: email,
+                phone: phone,
+                address: address,
+                initialBalance:initialBalance,
+                pincode: pincode,
+                aadharNo: aadharNo,
+                panNo: panNo,
+                password:password
+            };
+
+            // Store the form data in the local storage
+            localStorage.setItem('bankAccountData', JSON.stringify(formData));
+axios.post('http://localhost:4000/user/CreateUser' , formData).then((response)=>{
+    console.log(response);
+    alert(response.data.message);
+    localStorage.setItem('token', response.data.token)
+    window.location.href = '../updateKyc/updateKyc.html'
+})
+.catch((err)=>{
+    console.log(err)
+})
+            // Clear the form fields
+            form.reset();
+
+            // Display a success message
+            alert('Form data has been stored in the local storage!');
+        });
+    </script>
+</body>
+</html>

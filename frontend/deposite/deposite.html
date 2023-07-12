@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Account</title>
+  <link rel="stylesheet" href="deposite.css">
+  <link rel="stylesheet" href="transfer.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="fadeInDown">Bank Account</h1>
+    <div id="balance"></div>
+
+    <div id="deposit">
+      <h2>Deposit Money</h2>
+      <form id="depositForm">
+        <label for="depositAmount">Amount:</label>
+        <input type="amount" id="amount" name="amount" placeholder="Deposite..."   required>
+        <button type="submit">Deposit</button>
+      </form>
+      <div id="depositResult"></div>
+    </div>
+
+    <div id="withdraw">
+      <h2>Withdraw Money</h2>
+      <form id="withdrawForm">
+        <label for="withdrawAmount">Amount:</label>
+        <input type="Amount" id="withdrawAmount" name="withdrawAmount"  placeholder="Withdraw..."  required>
+        <button type="submit">Withdraw</button>
+      </form>
+      <div id="withdrawResult"></div>
+    </div>
+  </div>
+  <div>
+    <h1>Bank Account</h1>
+    <form id="transferForm">
+      <h2>Transfer Money</h2>
+      <label>To Account Name:</label>
+      <input id="toName" class="name" placeholder="To Account Name..." required>
+      <label>Amount:</label>
+      <input id="transferAmount" class="amount" placeholder="Amount..." required>
+      <button id="transferBtn">Transfer</button>
+    </form>
+
+    <form id="receiveForm">
+      <h2>Receive Money</h2>
+      <label>From Account Name:</label>
+      <input id="fromName" class="name" placeholder="From Account Name..." required>
+      <label>Amount:</label>
+      <input id="receiveAmount" class="amount" placeholder="Amount..." required>
+      <button id="receiveBtn">Receive</button>
+    </form>
+  </div>
+  <div>
+    <div id="print">
+      <button id="printStatementBtn">Print Statement</button>
+    </div>
+  <div>
+
+  </div id='close'>
+    <button id="closeAccountBtn">Close Account</button>
+  </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js" integrity="sha512-QTnb9BQkG4fBYIt9JGvYmxPpd6TBeKp6lsUrtiVQsrJ9sb33Bn9s0wMQO9qVBFbPX3xHRAsBHvXlcsrnJjExjg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script src="./deposite.js"></script>
+    <script src="./withdraw.js"></script>
+</body>
+</html>
