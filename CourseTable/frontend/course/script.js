@@ -1,18 +1,9 @@
-let table = document.querySelector('#courseTable tbody');
 
 
 const courseForm = document.getElementById('courseForm');
 const courseTable = document.querySelector('#courseTable tbody');
 
 courseForm.addEventListener('submit', submit);
-
-// Function to render the course data in the table
-function renderCourse(course) {
-  let tr = document.createElement('tr');
-  tr.innerHTML = `${result.courseName}-${result.startDate}-${result.lessonComplete} - ${result.duration}`;
-
-  table.appendChild(tr);
-}
 
 // Function to handle form submission
 function submit(e) {
@@ -33,9 +24,7 @@ function submit(e) {
   axios
     .post('http://localhost:3000/course/coursePOST', course)
     .then((response) => {
-      const createdCourse = response.data;
-      renderCourse(createdCourse);
-      courseForm.reset();
+      alert(response.data.message);
     })
     .catch((error) => {
       console.error('Error creating course:', error);
@@ -47,18 +36,39 @@ window.addEventListener('DOMContentLoaded', () => {
     .get('http://localhost:3000/course/courseGet')
     .then((response) => {
       console.log('Response:', response);
-      if (Array.isArray(response.data)) {
-        response.data.forEach((result) => {
-          let tr = document.createElement('tr');
-          tr.innerHTML = `${result.courseName}-${result.startDate}-${result.lessonComplete} - ${result.duration}`;
+      let result = response.data.data;
+      console.log('result :' , result)
+  
+      if (Array.isArray(result)) {
+        let table = document.getElementById('courseTable');
 
-          table.appendChild(tr);
+        result.forEach((ele) => {
+          let row = document.createElement('tr');
+
+          let courseNameCell = document.createElement('td');
+          courseNameCell.textContent = ele.courseName;
+          row.appendChild(courseNameCell);
+
+          let startDateCell = document.createElement('td');
+          startDateCell.textContent = ele.startDate;
+          row.appendChild(startDateCell);
+
+          let lessonCompleteCell = document.createElement('td');
+          lessonCompleteCell.textContent = ele.lessonComplete;
+          row.appendChild(lessonCompleteCell);
+
+          let durationCell = document.createElement('td');
+          durationCell.textContent = ele.duration;
+          row.appendChild(durationCell);
+
+          table.appendChild(row);
         });
       } else {
-        console.error('Invalid response data format:', response.data);
+        console.error('Invalid response data format:', result);
       }
     })
     .catch((error) => {
       console.error('Error retrieving course data:', error);
     });
 });
+
