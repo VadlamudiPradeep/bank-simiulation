@@ -13,20 +13,20 @@
         
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            background: linear-gradient(to bottom right, #ff0080, #8000ff, #00bfff);
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            text-align: center;
         }
         
         header {
             background-color: #333;
             color: #fff;
             padding: 20px;
-            text-align: center;
         }
         
         h1 {
@@ -36,55 +36,61 @@
         
         p {
             font-size: 18px;
+            margin-bottom: 20px;
+            color: #666;
         }
         
         .content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
+            margin-bottom: 20px;
+            position: relative;
         }
         
-        .box {
-            width: 300px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 20px;
+        .tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .content img {
+            max-width: 100%;
+            height: auto;
+            width: 300px; /* Adjust the width as needed */
+            height: 200px; /* Adjust the height as needed */
+        }
+        
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
             margin: 10px;
-            text-align: center;
         }
         
-        @media (max-width: 768px) {
-            .box {
-                width: 100%;
-            }
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Responsive Home Screen</h1>
-            <p>Welcome to our website!</p>
+            <h1>A Responsibly As Teach Leading Global Company</h1>
         </header>
-        
+        <p>Creating Superior Products & Services</p>
         <div class="content">
-            <div class="box">
-                <h2>Feature 1</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            
-            <div class="box">
-                <h2>Feature 2</h2>
-                <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-            
-            <div class="box">
-                <h2>Feature 3</h2>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-            </div>
+            <span class="tag">Trustpilot Rated Best 12.6k Reviews</span>
+            <img src="https://wallpapercave.com/wp/wp2905422.jpg" alt="Image">
         </div>
+        <button>Signup to Get 50% OFF</button>
+        <button>Explore New Products</button>
     </div>
 </body>
 </html>
+
