@@ -27,7 +27,7 @@ function calculateResult(question) {
     return `${num1} ${operator} ${num2} is ${result}`;
   }
   
-  // Get the question from command-line arguments
+  
   const question = process.argv.slice(2).join(" ");
   
   // Calculate and print the result
