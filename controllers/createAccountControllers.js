@@ -69,17 +69,7 @@ const getAccount = async (req, res) => {
 
 const close = async (req, res) => {
   try {
-    // const token = req.headers.authorization;
-    // console.log('token ===>', token);
-
-    // const decodedToken = verifyToken(token);
-    // console.log('decodedToken', decodedToken);
-
-    // const userId = decodedToken.userId;
-    // console.log('userId ===>', userId);
-
-    // Find the account by the ID
-    const account = await Account.findOne({ where: { id: req.user.accountId} });
+      const account = await Account.findOne({ where: { id: req.user.accountId} });
 
 
     if (!account) {
