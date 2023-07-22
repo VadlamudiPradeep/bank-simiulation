@@ -3,8 +3,9 @@ let router  = express.Router();
 
 
 let createAcccountControllers = require('../controllers/createAccountControllers');
+let middleware  = require('../middleware/auth')
 
 router.post('/CreateUser' , createAcccountControllers.createUserAccount);
-router.get('/getStatement' , createAcccountControllers.getAccount)
-router.post('/closeAccount' , createAcccountControllers.close)
+router.get('/getStatement' ,middleware.authenticate, createAcccountControllers.getAccount)
+router.post('/closeAccount' , middleware.authenticate , createAcccountControllers.close)
 module.exports = router;

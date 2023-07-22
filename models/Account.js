@@ -1,50 +1,46 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../util/database');
 
-// create user table
-const User = sequelize.define('user', {
+
+let account = sequelize.define('UserAcc', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    
-    name: Sequelize.STRING,
-    gender:Sequelize.STRING,
-    dob:Sequelize.STRING ,
-    email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-    },
-    phone:{
-        type:Sequelize.STRING,
-        allowNull:false,
-    }, 
-    address:{
-        type:Sequelize.STRING,
-        allowNull:false,
-    },
-    pincode:{
-        type:Sequelize.STRING,
-        allowNull:false,
-    },
-    initialBalance:{
-        type:Sequelize.STRING,
-        allowNull:false,
-    },
-    aadharNo:{
-        type:Sequelize.STRING,
-        allowNull:false,
-    },
-    panNo:{
-        type:Sequelize.STRING,
-        allowNull:false,
-    }
+   name:Sequelize.STRING,
 
    
-  
+   gender:{
+    type:Sequelize.STRING
+   },
+   dob:{
+    type:Sequelize.STRING,
+   },
+   email:{
+    type:Sequelize.STRING,
+    allowNull:false,
+    unique:true
+   },
+   phone:{
+    type:Sequelize.STRING,
+   },
+   address:{
+    type:Sequelize.STRING,
+   },
+   pincode:{
+    type:Sequelize.STRING,
+   },
+   initialBalance:{
+    type:Sequelize.STRING
+   },
+   aadharNo:{
+    type:Sequelize.STRING,
+   },
+   panNo:{
+    type:Sequelize.STRING
+   },
+   
 })
-
-module.exports = User;
+module.exports = account ; 

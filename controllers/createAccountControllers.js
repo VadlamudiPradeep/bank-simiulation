@@ -1,14 +1,17 @@
 const Account = require('../models/Account');
-const bcrypt = require('bcryptjs');
-const { generateToken } = require('../jwt');
-const { verifyToken } = require('../jwt');
-
+//const bcrypt = require('bcryptjs');
+// const { generateToken } = require('../jwt');
+// const { verifyToken } = require('../jwt');
+const jwt = require('jsonwebtoken')
 function isStringValid(string){
   if(string === undefined || string.length === 0){
       return true;
   }else{
       return false;
   }
+}
+function GenerateAccessToken(id, name ){
+  return jwt.sign({userId : id , name:name },process.env.JWT_SECRET)
 }
 
 
@@ -17,8 +20,9 @@ const createUserAccount = async (req, res) => {
   try {
     let { name, gender, dob, email, phone, address, pincode, initialBalance, aadharNo, panNo } = req.body;
 
-
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    if (isStringValid(name) || isStringValid(gender) || isStringValid(dob) || isStringValid(phone) || isStringValid(address) || isStringValid(pincode) || isStringValid(initialBalance) || isStringValid(aadharNo) || isStringValid(panNo)) {
+      return res.status(400).send({ message: 'Invalid form details' });
+    }
 
     const user = await Account.create({
       name,
@@ -31,29 +35,25 @@ const createUserAccount = async (req, res) => {
       initialBalance,
       aadharNo,
       panNo,
-      password: hashedPassword,
     });
 
     // Generate JWT token
-    const token = generateToken({ userId: user.id });
+    const token = GenerateAccessToken(user.id, user.name);
 
     return res.status(200).send({ message: 'success', data: user, token });
   } catch (err) {
     console.error(err);
-    return res.status(400).send({ message: 'failed' });
+    return res.status(400).send({ message: 'Failed to create account' });
   }
 };
+
 
 const getAccount = async (req, res) => {
   try {
     const token = req.headers.authorization;
-    console.log('token ===>', token);
-
     const decodedToken = verifyToken(token);
-    console.log('decodedToken', decodedToken);
-
     const userId = decodedToken.userId;
-    console.log('userId ===>', userId);
+
 
     const account = await Account.findOne({ where: { id: userId } });
 
@@ -69,17 +69,8 @@ const getAccount = async (req, res) => {
 
 const close = async (req, res) => {
   try {
-    // const token = req.headers.authorization;
-    // console.log('token ===>', token);
-
-    // const decodedToken = verifyToken(token);
-    // console.log('decodedToken', decodedToken);
-
-    // const userId = decodedToken.userId;
-    // console.log('userId ===>', userId);
-
-    // Find the account by the ID
-    const account = await Account.findOne({ where: { id: req.user.accountId} });
+    console.log('req.user.id ===> ' , req.user.id)
+    const account = await Account.findOne({ where: { id: req.user.id} });
 
 
     if (!account) {
@@ -102,6 +93,7 @@ const close = async (req, res) => {
 
 module.exports = {
   createUserAccount,
+  GenerateAccessToken,
   getAccount ,
   close,
 

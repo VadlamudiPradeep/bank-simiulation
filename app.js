@@ -27,7 +27,9 @@ app.use('/update', updatedKYC);
 Account.hasMany(Ledger);
 Ledger.belongsTo(Account);
 
-sequelize.sync()
+sequelize
+//.sync({force:true})
+.sync()
   .then(() => {
     app.listen(4000, () => {
       console.log('Server is running on port 4000');

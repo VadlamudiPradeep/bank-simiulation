@@ -2,7 +2,7 @@ const updatedAccount = require('../models/updatedKyc');
 
 const updatedKYC = async (req, res) => {
   try {
-    // Extract the KYC data from the request body
+  
     const { name, dob, email, mobile, adharNo, panNo } = req.body;
     const bankAccount = await updatedAccount.create({
       name,
